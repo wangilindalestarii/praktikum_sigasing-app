@@ -38,7 +38,7 @@
                                           </a>
                                     </li>
                                     <li class="nav-item">
-                                          <a href="#" class="nav-link">
+                                          <a href="?page=lokasireadjabatan" class="nav-link">
                                                 <i class="far fa-cirlce nav-icon"></i>
                                                 <p>Jabatan</p>
                                           </a>
