@@ -4,29 +4,23 @@ if (isset($_POST['button_create'])) {
     $database = new Database();
     $db = $database->getConnection();
 
-    $nik = htmlspecialchars($_POST['nik']);
-
     $validateSQL = "SELECT * FROM karyawan WHERE nik = ?";
     $stmt = $db->prepare($validateSQL);
     $stmt->bindParam(1, $nik);
     $stmt->execute();
-
     if ($stmt->rowCount() > 0) {
 ?>
         <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismis="alert" aria-hidden="true"></button>
+            <button type="button" class="close" data-dismis="alert" aria-hidden="true">x</button>
             <h5><i class="icon fas fa-ban"></i>Gagal</h5>
             Nik sama sudah ada
         </div>
         <?php
     } else {
-        $username = htmlspecialchars($_POST['username']);
-
         $validateSQL = "SELECT * FROM pengguna WHERE username = ?";
         $stmt = $db->prepare($validateSQL);
         $stmt->bindParam(1, $username);
         $stmt->execute();
-
         if ($stmt->rowCount() > 0) {
         ?>
             <div class="alert alert-danger alert-dismissible">
@@ -36,10 +30,7 @@ if (isset($_POST['button_create'])) {
             </div>
             <?php
         } else {
-            $password = htmlspecialchars($_POST['password']);
-            $password_ulangi = htmlspecialchars($_POST['passwordulangi']);
-
-            if ($password != $password_ulangi) {
+            if ($_POST['password'] != $_POST['password_ulangi']) {
             ?>
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismis="alert" aria-hidden="true"></button>
@@ -48,44 +39,37 @@ if (isset($_POST['button_create'])) {
                 </div>
 <?php
             } else {
-                $username = htmlspecialchars($_POST['username']);
-                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                $peran = htmlspecialchars($_POST['peran']);
+                $md5Password = md5($_POST['password']);
 
-                $insertSql = "INSERT INTO pengguna SET username = ?, password = ?, peran = ?";
+                $insertSql = "INSERT INTO pengguna VALUES (NULL, ?, ?, ?, NUL)";
                 $stmt = $db->prepare($insertSql);
                 $stmt->bindParam(1, $username);
-                $stmt->bindParam(2, $password);
+                $stmt->bindParam(2, $md5Password);
                 $stmt->bindParam(3, $peran);
 
                 if ($stmt->execute()) {
 
                     $pengguna_id = $db->lastInsertId();
-                    $nik = $_POST['nik'];
-                    $nama_lengkap = $_POST['nama_lengkap'];
-                    $handphone = $_POST['handphone'];
-                    $email = $_POST['email'];
-                    $tanggal_masuk = $_POST['tanggal_masuk'];
 
-                    $insertKaryawanSql = "INSERT INTO karyawan SET nik = ?, nama_lengkap = ?, handphone = ?, email = ?, tanggal_masuk = ?, pengguna_id = ?";
+                    $insertKaryawanSql = "INSERT INTO karyawan VALUES (NULL, ?, ?, ?, ?, ?, ?)";
                     $stmtKaryawan = $db->prepare($insertKaryawanSql);
-                    $stmtKaryawan->bindParam(1, $nik);
-                    $stmtKaryawan->bindParam(2, $nama_lengkap);
-                    $stmtKaryawan->bindParam(3, $handphone);
-                    $stmtKaryawan->bindParam(4, $email);
-                    $stmtKaryawan->bindParam(5, $tanggal_masuk);
-                    $stmtKaryawan->bindParam(6, $pengguna_id);
+                    $stmtKaryawan->bindParam(1, $_POST['nik']);
+                    $stmtKaryawan->bindParam(2, $_POST['nama_lengkap']);
+                    $stmtKaryawan->bindParam(3, $_POST['handphone']);
+                    $stmtKaryawan->bindParam(4, $_POST['email']);
+                    $stmtKaryawan->bindParam(5, $_POST['tanggal_masuk']);
+                    $stmtKaryawan->bindParam(6, $_POST['pengguna_id']);
 
                     if ($stmtKaryawan->execute()) {
                         $_SESSION['hasil'] = true;
                         $_SESSION['pesan'] = "Simpan Berhasil";
                     } else {
                         $_SESSION['hasil'] = false;
-                        $_SESSION['pesan'] = "Simpan Gagal";
+                        $_SESSION['pesan'] = "Gagal Simpan Data";
                     }
                 } else {
                     $_SESSION['hasil'] = false;
-                    $_SESSION['pesan'] = "Simpan Gagal";
+                    $_SESSION['pesan'] = "Gagal Simpan Data";
                 }
                 echo "<meta http-equiv='refresh' content='0;url=?page=karyawanread'>";
             }
@@ -111,6 +95,9 @@ if (isset($_POST['button_create'])) {
         </div>
     </div>
 </section>
+
+
+
 
 <section class="content">
     <div class="card">
