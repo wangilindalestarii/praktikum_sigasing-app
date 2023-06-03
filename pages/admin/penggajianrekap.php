@@ -38,13 +38,13 @@
                               <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
                               <li class="breadcrumb-item active">Rekapitulasi Penggajian</li>
                         </ol>
-                  </div><!-- /.col -->
-            </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+                  </div>
+            </div>
+      </div>
 </div>
-<!-- /.content-header -->
 
-<!-- Main content -->
+
+
 <div class="content">
       <div class="card">
             <div class="card-header">
