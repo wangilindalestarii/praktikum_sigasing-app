@@ -108,8 +108,6 @@
                                                 ?>
                                                 <a href="?page=karyawanjabatan&id=<?php echo $row['id'] ?> class=" btn bg-fuchsia btn-sm mr-1">
                                                       <i class="fa fa-building"></i> <?php echo $jabatan_terkini ?></a>
-
-                                                <!-- echo $row['jabatan_terkini'] ?> -->
                                           </td>
                                           <td>
                                                 <a href="?page=karyawanupdate&id=<?php echo $row['id'] ?>" class="btn btn-primary btn-sm mr-1">

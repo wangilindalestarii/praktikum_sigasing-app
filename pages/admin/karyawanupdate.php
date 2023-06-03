@@ -111,7 +111,7 @@ if (isset($_GET['id'])) {
                                     <div class="form-group">
                                           <label for="email">Email</label>
                                           <input type="hidden" class="form-control" name="id" value="<?php echo $row['id'] ?>">
-                                          <input type="text" class="form-control" name="email" value="<?php echo $row['email'] ?>">
+                                          <input type="email" class="form-control" name="email" value="<?php echo $row['email'] ?>">
                                     </div>
                                     <div class="form-group">
                                           <label for="tanggal_masuk">Tanggal Masuk</label>
@@ -119,14 +119,19 @@ if (isset($_GET['id'])) {
                                           <input type="date" class="form-control" name="tanggal_masuk" value="<?php echo $row['tanggal_masuk'] ?>">
                                     </div>
                                     <div class="form-group">
-                                          <label for="username">Username</label>
+                                          <label for="nama_lengkap">Username</label>
                                           <input type="hidden" class="form-control" name="id" value="<?php echo $row['id'] ?>">
-                                          <input type="date" class="form-control" name="username" value="<?php echo $row['username'] ?>">
+                                          <input type="text" class="form-control" name="nama_lengkap" value="<?php echo $row['nama_lengkap'] ?>">
                                     </div>
                                     <div class="form-group">
-                                          <label for="tanggal_masuk">Tanggal Masuk</label>
+                                          <label for="tanggal_masuk">Password</label>
                                           <input type="hidden" class="form-control" name="id" value="<?php echo $row['id'] ?>">
-                                          <input type="date" class="form-control" name="tanggal_masuk" value="<?php echo $row['tanggal_masuk'] ?>">
+                                          <input type="password" class="form-control" name="password" value="<?php echo $row['tanggal_masuk'] ?>">
+                                    </div>
+                                    <div class="form-group">
+                                          <label for="tanggal_masuk">Password(ulangi)</label>
+                                          <input type="hidden" class="form-control" name="id" value="<?php echo $row['id'] ?>">
+                                          <input type="password" class="form-control" name="password" value="<?php echo $row['tanggal_masuk'] ?>">
                                     </div>
 
                                     <a href="?page=karyawanread" class="btn btn-danger btn-sm float-right">
